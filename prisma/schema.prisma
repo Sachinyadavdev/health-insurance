@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  password     String
+  role         Role          @default(USER)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  policies     UserPolicy[]
+  claims       Claim[]
+  payments     Payment[]
+  documents    Document[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Policy {
+  id           String        @id @default(cuid())
+  name         String
+  description  String        @db.Text
+  coverage     Float
+  premium      Float
+  term         Int           // Term in months
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  userPolicies UserPolicy[]
+}
+
+model UserPolicy {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  policy       Policy        @relation(fields: [policyId], references: [id])
+  policyId     String
+  startDate    DateTime
+  endDate      DateTime
+  status       PolicyStatus  @default(ACTIVE)
+  claims       Claim[]
+  payments     Payment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum PolicyStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PENDING
+}
+
+model Claim {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  userPolicy   UserPolicy    @relation(fields: [userPolicyId], references: [id])
+  userPolicyId String
+  amount       Float
+  description  String        @db.Text
+  status       ClaimStatus   @default(PENDING)
+  date         DateTime      @default(now())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum ClaimStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Payment {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  userPolicy   UserPolicy    @relation(fields: [userPolicyId], references: [id])
+  userPolicyId String
+  amount       Float
+  status       PaymentStatus @default(COMPLETED)
+  transId      String        @unique
+  date         DateTime      @default(now())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Document {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  type         String        // e.g., 'ID_PROOF', 'MEDICAL_RECORD'
+  url          String
+  uploadDate   DateTime      @default(now())
+}
