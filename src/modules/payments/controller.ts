@@ -8,13 +8,13 @@ export const paymentController = {
       if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
       const body = await req.json();
-      const { policyId, userPolicyId, amount } = body;
+      const { userPolicyId, amount } = body;
       
-      if (!policyId || !userPolicyId || !amount) {
+      if (!userPolicyId || !amount) {
         return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
       }
 
-      const payment = await paymentService.processPayment(userId, policyId, userPolicyId, amount);
+      const payment = await paymentService.processPayment(userId, userPolicyId, amount);
       return NextResponse.json(payment, { status: 201 });
     } catch (error: any) {
       return NextResponse.json({ error: error.message }, { status: 400 });

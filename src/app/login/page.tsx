@@ -46,7 +46,7 @@ export default function LoginPage() {
         className="w-full max-w-md p-8 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl"
       >
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-400">
+          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-emerald-600 to-teal-400">
             Welcome Back
           </h1>
           <p className="text-neutral-500 mt-2">Sign in to manage your health plans</p>

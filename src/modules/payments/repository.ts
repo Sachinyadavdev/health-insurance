@@ -1,11 +1,10 @@
 import prisma from '@/lib/prisma';
 
 export const paymentRepository = {
-  createPayment: async (userId: string, policyId: string, userPolicyId: string, amount: number, transId: string) => {
+  createPayment: async (userId: string, userPolicyId: string, amount: number, transId: string) => {
     return prisma.payment.create({
       data: {
         userId,
-        policyId,
         userPolicyId,
         amount,
         transId,

@@ -94,7 +94,7 @@ export default function DashboardPage() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-8 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-400 text-white shadow-xl shadow-emerald-500/20"
+            className="p-8 rounded-2xl bg-linear-to-br from-emerald-500 to-teal-400 text-white shadow-xl shadow-emerald-500/20"
           >
             <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.name.split(' ')[0]}!</h1>
             <p className="opacity-90 max-w-lg text-emerald-50">

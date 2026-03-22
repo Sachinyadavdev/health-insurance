@@ -9,7 +9,7 @@ export default function Home() {
     <div className="flex flex-col min-h-[calc(100vh-80px)]">
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-900/10 -z-10" />
+        <div className="absolute inset-0 bg-linear-to-br from-emerald-50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-900/10 -z-10" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-400/20 dark:bg-emerald-500/10 rounded-full blur-3xl -z-10" />
 
         <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -35,7 +35,7 @@ export default function Home() {
             className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6"
           >
             Your Health, <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-400">
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-600 to-teal-400">
               Our Priority.
             </span>
           </motion.h1>
