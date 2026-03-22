@@ -1,5 +1,7 @@
 import { paymentController } from '@/modules/payments/controller';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: Request) {
   return paymentController.getUserPayments(req);
 }
